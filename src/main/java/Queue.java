@@ -1,57 +1,83 @@
-public class Queue<T>
-{
-  private Node<T> first;
-  private Node<T> last;
+public class QueueAlgorithms {
 
-  public Queue()
-  {
-    this.first = null;
-    this.last = null;
-  }
+    public static Queue<Integer> sequenceLengths(Queue<Character> q) {
+        Queue<Integer> result = new Queue<>();
+        if (q.isEmpty()) return result;
 
-  public void insert(T x)
-  {
-    Node<T> temp = new Node<T>(x);
-    if (first == null)
-      first = temp;
-    else
-      last.setNext(temp);
-    last = temp;
-  }
+        char prev = q.remove();
+        int count = 1;
 
-  public T remove()
-  {
-    T x = first.getValue();
-    first = first.getNext();
-    if (first == null)
-      last = null;
-    return x;
-  }
-
-  public T head()
-  {
-    return first.getValue();
-  }
-
-  public boolean isEmpty()
-  {
-    return first == null;
-  }
-
-  public String toString()
-  {
-    if (isEmpty())
-      return "[]";
-    String s = "[";
-    insert(null);
-    T temp = remove();
-    while (temp != null) {
-      s += temp;
-      insert(temp);
-      temp = remove();
-      if (temp != null)
-        s += ", ";
+        while (!q.isEmpty()) {
+            char curr = q.remove();
+            if (curr == prev) {
+                count++;
+            } else {
+                result.insert(count);
+                count = 1;
+                prev = curr;
+            }
+        }
+        result.insert(count);
+        return result;
     }
-    return s + "]";
-  }
+    // Time: O(n) , Space: O(n)
+
+    public static boolean hasDuplicates(Queue<String> q) {
+        Queue<String> aux = new Queue<>();
+
+        while (!q.isEmpty()) {
+            String s = q.remove();
+            if (isIn(s, aux)) return true;
+            aux.insert(s);
+        }
+        return false;
+    }
+    // Time: O(n^2) , Space: O(n)
+
+    public static void removeDuplicates(Queue<Integer> q) {
+        Queue<Integer> aux = new Queue<>();
+
+        while (!q.isEmpty()) {
+            int x = q.remove();
+            if (!isIn(x, aux)) {
+                aux.insert(x);
+            }
+        }
+
+        while (!aux.isEmpty()) {
+            q.insert(aux.remove());
+        }
+    }
+    // Time: O(n^2) , Space: O(n)
+
+    public static void sortQueue(Queue<Integer> q) {
+        Queue<Integer> sorted = new Queue<>();
+        Queue<Integer> aux = new Queue<>();
+
+        while (!q.isEmpty()) {
+            int min = q.remove();
+            aux.insert(min);
+
+            while (!q.isEmpty()) {
+                int x = q.remove();
+                if (x < min) {
+                    aux.insert(min);
+                    min = x;
+                } else {
+                    aux.insert(x);
+                }
+            }
+
+            sorted.insert(min);
+
+            while (!aux.isEmpty()) {
+                q.insert(aux.remove());
+            }
+        }
+
+        while (!sorted.isEmpty()) {
+            q.insert(sorted.remove());
+        }
+    }
+    // Time: O(n^2) , Space: O(n)
 }
