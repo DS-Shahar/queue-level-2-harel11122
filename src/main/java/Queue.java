@@ -81,3 +81,27 @@ public class QueueAlgorithms {
     }
     // Time: O(n^2) , Space: O(n)
 }
+public static int longestEvenSequenceSum(Queue<Integer> q){
+    int maxLen = 0, maxSum = 0;
+    int currentLen = 0, currentSum = 0;
+    int size = q.size();
+
+    for(int i = 0; i < size; i++){
+        int x = q.remove();
+        q.add(x);
+
+        if(x % 2 == 0){
+            currentLen++;
+            currentSum += x;
+            if(currentLen > maxLen){
+                maxLen = currentLen;
+                maxSum = currentSum;
+            }
+        } else {
+            currentLen = 0;
+            currentSum = 0;
+        }
+    }
+    return maxSum;
+}
+// סיבוכיות זמן ריצה: O(n)
