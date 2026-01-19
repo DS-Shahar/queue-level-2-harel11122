@@ -208,6 +208,17 @@ public class Main {
         return q;    
         
     }
-	
+	public static Queue<Integer> max(Queue <Integer> q){
+        int x=q.head.
+         while(q.head()!=0){
+             if(q.head()>x){
+                 x=q.remove();
+             }
+             else{
+                 q.remove();}
+         }
+         return x;
+    }
+}
 
 	
