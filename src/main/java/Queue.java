@@ -15,6 +15,13 @@ public class QueueAlgorithms {
         // קריאה לפונקציה
         Node<Integer> result = listMax(q);
 
+System.out.print("Max list: ");
+        Node<Integer> p = result;
+        while (p != null) {
+            System.out.print(p.getValue() + " ");
+            p = p.getNext();
+        }
+
     public static Queue<Integer> sequenceLengths(Queue<Character> q) {
         Queue<Integer> result = new Queue<>();
         if (q.isEmpty()) return result;
