@@ -219,6 +219,23 @@ public class Main {
          }
          return x;
     }
+	public static Node<Integer> listMax(Queue<Integer> q){
+        Queue<Integer> qCopy = copyQueue(q);
+        Node<Integer> p = new Node<Integer>(-1);
+        Node<Integer> h = p;
+        
+        while (!qCopy.isEmpty()){
+            if (qCopy.head() == 0) {
+            qCopy.remove(); 
+        } else {
+            int x=max0(qCopy);
+            Node<Integer> maxNum = new Node<Integer>(x);
+            p.setNext(maxNum);
+            p=p.getNext();
+        }
+        }
+        return h.getNext();
+
 }
 
 	
