@@ -103,4 +103,16 @@
            
     return Count+ex17(T.getLeft()) + ex17(T.getRight());}
     }
+public static boolean even(BinNode <Integer> T){
+        if (T==null){
+            return true;
+        }
+        if(T.hasRight()&&!T.hasLeft()){
+            return false;}
+        else{
+            return even(T.getLeft()&& even(t.getRight()));
+        
+        }
+        
+    }
 }
